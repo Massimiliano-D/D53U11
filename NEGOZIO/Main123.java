@@ -33,15 +33,24 @@ public class Main123 {
         pippo2.add(pt9);
         pippo2.add(pt1);
 
-        Order o1 = new Order(1L, "In progress", LocalDate.now(), LocalDate.now().plusDays(3), pippo1, cos1);
+        Order ord1 = new Order(1L, "In progress", LocalDate.now(), LocalDate.now().plusDays(3), pippo1, cos1);
 
-        Order o2 = new Order(2L, "In progress", LocalDate.now(), LocalDate.now().plusDays(5), pippo2, cos1);
+        Order ord2 = new Order(2L, "In progress", LocalDate.now(), LocalDate.now().plusDays(5), pippo2, cos1);
 
+        //********************ESERCIZIO NUMERO 1********************\\
+        List<Product> pippoStream = pippo1.stream().filter(x -> x.category.equals("Book")).filter(x -> x.price > 100).toList();
 
-        List<Product> arrStream = pippo1.stream().filter(x -> x.category.equals("Book")).filter(x -> x.price > 100).toList();
-
-        for (Product pt : arrStream) {
+        for (Product pt : pippoStream) {
             System.out.println("Prodotto Book superiore a 100€: " + pt.toString());
+        }
+
+        //********************ESERCIZIO NUMERO 2********************\\
+        List<Order> pippoOrder = new ArrayList<>();
+        pippoOrder.add(ord1);
+        pippoOrder.add(ord2);
+        List<Order> pippoOrderFilt = pippoOrder.stream().filter(y -> y.products.stream().anyMatch(product -> product.category.equals("Baby"))).toList();
+        for (Order ord : pippoOrderFilt) {
+            System.out.println(ord);
         }
     }
 }
