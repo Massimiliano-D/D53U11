@@ -23,12 +23,12 @@ public class Main123 {
         List<Product> pippo1 = new ArrayList<>();
         pippo1.add(pt2);
         pippo1.add(pt4);
+        pippo1.add(pt5);
         pippo1.add(pt6);
         pippo1.add(pt8);
 
         List<Product> pippo2 = new ArrayList<>();
         pippo2.add(pt3);
-        pippo2.add(pt5);
         pippo2.add(pt7);
         pippo2.add(pt9);
         pippo2.add(pt1);
@@ -50,7 +50,14 @@ public class Main123 {
         pippoOrder.add(ord2);
         List<Order> pippoOrderFilt = pippoOrder.stream().filter(y -> y.products.stream().anyMatch(product -> product.category.equals("Baby"))).toList();
         for (Order ord : pippoOrderFilt) {
-            System.out.println(ord);
+            System.out.println("baby " + ord);
         }
+        //********************ESERCIZIO NUMERO 3********************\\
+        List<Product> pippoDiscountBoy = pippo1.stream().filter(z -> z.category.equals("Boy")).map(z -> {
+            double discount = (z.getPrice() * 0.1);
+            z.setPrice(z.getPrice() - discount);
+            return z;
+        }).toList();
+        System.out.println("Prodotti scontati: " + pippoDiscountBoy);
     }
 }
